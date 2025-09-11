@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const RegisterPage = () => {
+  const { register } = useContext(AuthContext);
+
   const [form, setForm] = useState({
     name: "",
     username: "",
@@ -12,39 +15,47 @@ const RegisterPage = () => {
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
-    // Simple validation
     if (form.password !== form.confirm) {
       setError("Passwords do not match!");
       return;
     }
 
-    // Simulate registration success
-    alert(`User Registered Successfully!\nWelcome, ${form.name}`);
-    setForm({
-      name: "",
-      username: "",
-      email: "",
-      phone: "",
-      password: "",
-      confirm: "",
-      address: "",
-    });
+    try {
+      const data = await register(form);
+      console.log(data);
+      setSuccess(`Welcome, ${data.user.name}!`);
+      setForm({
+        name: "",
+        username: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirm: "",
+        address: "",
+      });
+    } catch (err) {
+      setError(err.response?.data?.message || "Registration failed");
+    }
   };
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-yellow-100 via-white to-red-100 p-6">
       <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border-2 border-yellow-400 p-8">
-        <h2 className="text-3xl font-bold text-center text-red-600 mb-6">Create Your Account</h2>
+        <h2 className="text-3xl font-bold text-center text-red-600 mb-6">
+          Create Your Account
+        </h2>
 
         <form onSubmit={handleSubmit} className="grid gap-4">
           {/* Name & Username */}
@@ -144,10 +155,11 @@ const RegisterPage = () => {
             />
           </div>
 
-          {/* Error Message */}
+          {/* Error / Success */}
           {error && <p className="text-red-500 text-sm font-semibold">{error}</p>}
+          {success && <p className="text-green-500 text-sm font-semibold">{success}</p>}
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
             className="mt-2 py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition"

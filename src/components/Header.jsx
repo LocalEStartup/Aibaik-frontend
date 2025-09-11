@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState , useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react"; // icons
 
+import { AuthContext } from "../context/AuthContext";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { user, logout } = useContext(AuthContext);
   return (
     <header className="sticky top-0 z-40 bg-gradient-to-r from-yellow-300 via-white to-red-400 border-b-4 border-red-500 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
@@ -75,6 +77,15 @@ export default function Header() {
           } title="Profile">
             👤
           </NavLink >
+             {/* Logout button - only for logged-in users */}
+          {user && (
+            <button
+              onClick={logout}
+              className="px-4 py-2 rounded-full bg-red-600 text-white hover:bg-red-700 transition"
+            >
+              Logout
+            </button>
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -172,6 +183,18 @@ export default function Header() {
                 >
                   👤 Profile
                 </NavLink >
+                     {/* Logout button - only for logged-in users */}
+              {user && (
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsOpen(false);
+                  }}
+                  className="px-4 py-2 rounded-full bg-red-600 text-white hover:bg-red-700 transition"
+                >
+                  Logout
+                </button>
+              )}
               </nav>
             </div>
           </div>

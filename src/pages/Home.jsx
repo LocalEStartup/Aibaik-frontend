@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+
 export default function Home() {
+  
+  const { user } = useContext(AuthContext);
   return (
     <main>
       {/* Hero Section */}
@@ -9,11 +14,44 @@ export default function Home() {
           <span className="uppercase text-xs tracking-widest font-bold text-red-500">Welcome to AIBAIK</span>
           <h1 className="text-4xl md:text-6xl font-extrabold mt-2 mb-4">Good food Eat smart & healthy</h1>
           <p className="text-gray-500 mb-6">Order your favorites, reserve a table, or meet our master chefs.</p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/login" className="px-6 py-3 bg-red-500 text-white rounded-lg shadow hover:-translate-y-1 transition">User Login</Link>
-            <Link to="/login#admin" className="px-6 py-3 bg-yellow-300 text-black rounded-lg shadow hover:-translate-y-1 transition">Admin Login</Link>
-            <Link to="/register" className="px-6 py-3 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition">New User? Register</Link>
-          </div>
+              {/* Show buttons only if user is NOT logged in */}
+          {!user && (
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                to="/login"
+                className="px-6 py-3 bg-red-500 text-white rounded-lg shadow hover:-translate-y-1 transition"
+              >
+                User Login
+              </Link>
+              <Link
+                to="/register"
+                className="px-6 py-3 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition"
+              >
+                New User? Register
+              </Link>
+            </div>
+          )}
+
+          {/* Example: If logged in, show dashboard link */}
+          {user && (
+            <div className="flex flex-wrap gap-4 justify-center">
+              {user.role === "admin" ? (
+                <Link
+                  to="/dashboard"
+                  className="px-6 py-3 bg-red-500 text-white rounded-lg shadow hover:-translate-y-1 transition"
+                >
+                  Go to Admin Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/userdashboard"
+                  className="px-6 py-3 bg-red-500 text-white rounded-lg shadow hover:-translate-y-1 transition"
+                >
+                  Go to User Dashboard
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
