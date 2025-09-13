@@ -7,6 +7,11 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { user, logout } = useContext(AuthContext);
+
+    const dashboardPath =
+    user?.role === "admin" ? "/dashboard" : "/userdashboard";
+
+
   return (
     <header className="sticky top-0 z-40 bg-gradient-to-r from-yellow-300 via-white to-red-400 border-b-4 border-red-500 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
@@ -71,7 +76,7 @@ export default function Header() {
               }`} >
             Cart
           </NavLink >
-          <NavLink to="/dashboard" className={({ isActive }) =>
+          <NavLink to={dashboardPath} className={({ isActive }) =>
             `px-4 py-2 rounded-full text-center transition ${isActive ? "bg-white text-white" : "hover:bg-yellow-300"
             }`
           } title="Profile">
@@ -173,7 +178,7 @@ export default function Header() {
                   Cart
                 </NavLink >
                 <NavLink
-                  to="/dashboard"
+                  to={dashboardPath}
                   className={({ isActive }) =>
                     `px-4 py-2 rounded-full text-center transition ${isActive ? "bg-red-500 text-white" : "hover:bg-yellow-300"
                     }`

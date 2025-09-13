@@ -62,7 +62,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {/* Veg */}
-            <Link to="/veg" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
+            <Link to="/menus/veg" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
               <img src="/idli1.jpg" alt="Vegetarian" className="h-40 w-full object-cover rounded-lg" />
               <h3 className="mt-3 text-lg font-bold">Vegetarian</h3>
               <div className="flex justify-between text-sm text-gray-500 mt-2">
@@ -75,7 +75,7 @@ export default function Home() {
             </Link>
 
             {/* Non-Veg */}
-            <Link to="/nonveg" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
+            <Link to="/menus/onveg" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
               <img src="/nonveg.jpg" alt="Non Veg" className="h-40 w-full object-cover rounded-lg" />
               <h3 className="mt-3 text-lg font-bold">Non-Vegetarian</h3>
               <div className="flex justify-between text-sm text-gray-500 mt-2">
@@ -88,7 +88,7 @@ export default function Home() {
             </Link>
 
             {/* Seafood */}
-            <Link to="/seafood" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
+            <Link to="/menus/seafood" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
               <img src="/seafood.jpg" alt="Seafood" className="h-40 w-full object-cover rounded-lg" />
               <h3 className="mt-3 text-lg font-bold">Seafood</h3>
               <div className="flex justify-between text-sm text-gray-500 mt-2">
@@ -101,7 +101,7 @@ export default function Home() {
             </Link>
 
             {/* Soups */}
-            <Link to="/soups" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
+            <Link to="/menus/soups" className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 shadow hover:-translate-y-1 transition">
               <img src="/soup.jpg" alt="Soups" className="h-40 w-full object-cover rounded-lg" />
               <h3 className="mt-3 text-lg font-bold">Soups</h3>
               <div className="flex justify-between text-sm text-gray-500 mt-2">

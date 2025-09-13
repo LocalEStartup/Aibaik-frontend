@@ -14,6 +14,7 @@ import RegisterPage from "./auth/Register";
 
 import AuthProvider, { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
+import CategoryPage from "./pages/CategoryPage";
 
 const PrivateRoute = ({ children, role }) => {
   const { user, loading } = useContext(AuthContext);
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/explore-menu" element={<ExploreMenu />} />
+          <Route path="/menus/:category" element={<CategoryPage />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/masterchef" element={<ChefSection />} />
           <Route path="/about" element={<About />} />
